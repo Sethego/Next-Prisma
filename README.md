@@ -46,7 +46,7 @@ npm --version     # Debe ser v9.0+
 
 ```bash
 # Si tienes Git
-git clone <URL-DEL-REPOSITORIO>
+git clone https://github.com/Sethego/Next-Prisma.git
 cd nextjs-prisma
 
 # O simplemente abre la carpeta en tu editor
