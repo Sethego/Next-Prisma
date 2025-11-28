@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+@layer components {
+  .card-base {
+    @apply bg-slate-800/50 border border-slate-700 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300;
+  }
+
+  .card-base:hover {
+    @apply border-slate-600 bg-slate-800/70;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .btn-primary-green {
+    @apply px-4 py-2 rounded-lg font-semibold bg-green-600 hover:bg-green-500 text-white shadow-lg shadow-green-900/20 transition-all duration-200 transform active:scale-95;
+  }
+
+  .btn-primary-red {
+    @apply px-4 py-2 rounded-lg font-semibold bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-900/20 transition-all duration-200 transform active:scale-95;
+  }
+
+  .input-base {
+    @apply w-full bg-slate-900 border border-slate-700 rounded-xl py-3 pl-4 pr-12 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200;
+  }
+
+  .stat-box {
+    @apply bg-slate-950/50 p-4 rounded-xl border border-slate-700/50 hover:border-slate-600/50 transition-colors;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-animation {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in-animation {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Scroll bar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-full hover:bg-slate-600;
+}

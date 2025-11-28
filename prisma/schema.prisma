@@ -14,9 +14,46 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// El modelo User (añadimos la relación 'account')
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  creadetAt DateTime @default(now())
+  id      Int     @id @default(autoincrement())
+  email   String  @unique
+  name    String?
+  account Account? // Relación 1:1 con la Cuenta
+}
+
+// NUEVO MODELO: Cuenta de Trading
+model Account {
+  id              Int            @id @default(autoincrement())
+  // Balance en la moneda fiduciaria (USD, dinero "real")
+  balanceUSD      Decimal        @default(10000.0) @db.Decimal(10, 2)
+  // Balance en la criptomoneda ficticia (Coin-X)
+  balanceCoinX    Decimal        @default(0.0) @db.Decimal(10, 4)
+
+  // Relación con el Usuario
+  userId          Int            @unique // Hace la relación 1:1
+  user            User           @relation(fields: [userId], references: [id])
+  
+  // Relación con las transacciones
+  transactions Transaction[]
+}
+
+// NUEVO MODELO: Transacción
+model Transaction {
+  id              Int            @id @default(autoincrement())
+  type            TransactionType // 'BUY' o 'SELL'
+  coinPrice       Decimal        @db.Decimal(10, 2) // Precio al momento de la transacción
+  amountUSD       Decimal        @db.Decimal(10, 2) // Cantidad de USD involucrada
+  amountCoinX     Decimal        @db.Decimal(10, 4) // Cantidad de Coin-X comprada/vendida
+  createdAt       DateTime       @default(now())
+
+  // Relación con la Cuenta
+  accountId       Int
+  account         Account        @relation(fields: [accountId], references: [id])
+}
+
+// NUEVO ENUM: Tipo de Transacción
+enum TransactionType {
+  BUY
+  SELL
 }

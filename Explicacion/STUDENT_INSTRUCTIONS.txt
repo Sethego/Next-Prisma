@@ -1,0 +1,349 @@
+================================================================================
+INSTRUCCIONES PARA ESTUDIANTES: CÓMO DESCARGAR Y EJECUTAR EL PROYECTO
+================================================================================
+
+Este archivo es para estudiantes que quieren trabajar con el proyecto
+Coin-X Exchange desde GitHub.
+
+
+================================================================================
+REQUISITOS
+================================================================================
+
+Antes de empezar, asegúrate de tener:
+
+✓ Node.js v18 o superior
+  Descarga desde: https://nodejs.org/
+  
+✓ Git instalado
+  Descarga desde: https://git-scm.com/download/win
+  
+✓ Editor de código (VS Code recomendado)
+  Descarga desde: https://code.visualstudio.com/
+  
+✓ Credenciales de Supabase
+  Contacta al profesor para obtener las credenciales
+
+
+================================================================================
+PASO 1: CLONAR EL PROYECTO
+================================================================================
+
+Abre PowerShell en la carpeta donde quieras guardar el proyecto.
+
+Ejecuta:
+    git clone https://github.com/USUARIO-DEL-PROFESOR/nextjs-prisma.git
+
+Esto descargará el proyecto completo.
+
+Luego entra en la carpeta:
+    cd nextjs-prisma
+
+
+================================================================================
+PASO 2: INSTALAR DEPENDENCIAS
+================================================================================
+
+Ejecuta:
+    npm install
+
+Esto instalará todas las librerías necesarias (Next.js, React, Prisma, etc).
+
+Espera a que termine (puede tomar 2-3 minutos).
+
+
+================================================================================
+PASO 3: CREAR ARCHIVO .env
+================================================================================
+
+En la carpeta del proyecto, verás un archivo llamado ".env.example"
+
+OPCIÓN A: Copiar manualmente
+1. Copia el contenido de .env.example
+2. Crea un nuevo archivo llamado ".env"
+3. Pega el contenido
+
+OPCIÓN B: Usar PowerShell (más fácil)
+    Copy-Item .env.example .env
+
+Ahora edita el archivo ".env" con tus credenciales:
+
+.env.example contiene:
+    DATABASE_URL="postgresql://[USER]:[PASSWORD]@[HOST]:6543/postgres"
+    DIRECT_URL="postgresql://[USER]:[PASSWORD]@[HOST]:5432/postgres"
+
+Reemplaza [USER], [PASSWORD] y [HOST] con tus datos reales de Supabase.
+
+⚠️ IMPORTANTE: Nunca subas .env a GitHub. Git automáticamente lo ignorará.
+
+
+================================================================================
+PASO 4: CONFIGURAR LA BASE DE DATOS
+================================================================================
+
+Ejecuta:
+    npm run prisma:migrate
+
+Esto crea las tablas en tu base de datos Supabase.
+
+Si quieres cargar datos de ejemplo:
+    npm run prisma:seed
+
+
+================================================================================
+PASO 5: INICIAR EL SERVIDOR
+================================================================================
+
+Ejecuta:
+    npm run dev
+
+Deberías ver:
+    ✓ Next.js 16.0.0 (Turbopack)
+    ✓ Ready in X.Xs
+    ✓ http://localhost:3000
+
+Abre tu navegador en: http://localhost:3000
+
+¡El proyecto está corriendo!
+
+
+================================================================================
+PASO 6: USAR LA APLICACIÓN
+================================================================================
+
+REGISTRARSE:
+1. Ve a http://localhost:3000
+2. Haz clic en "Crear Cuenta"
+3. Ingresa tu email y nombre
+4. Haz clic en "Registrarse"
+
+HACER TRADING:
+1. Recibirás $10,000 USD iniciales
+2. Ingresa un monto y haz clic en "Comprar" para comprar Coin-X
+3. El precio cambia cada 2 segundos
+4. Puedes vender en la pestaña "Vender"
+
+VER HISTORIAL:
+1. Todos tus trades aparecen en la tabla de transacciones
+2. Se guardan en la base de datos
+
+
+================================================================================
+HACER CAMBIOS EN EL CÓDIGO
+================================================================================
+
+El proyecto recompilará automáticamente cuando hagas cambios.
+
+Archivos principales para editar:
+
+app/page.tsx
+    └─ Página de login/registro
+
+app/trading/page.tsx
+    └─ Dashboard de trading
+
+app/globals.css
+    └─ Estilos de la aplicación
+
+app/api/
+    └─ API endpoints (backend)
+
+
+PARA VER TUS CAMBIOS:
+1. Edita un archivo
+2. Guarda (Ctrl+S)
+3. Espera 2-3 segundos
+4. Recarga la página (Ctrl+R)
+
+
+================================================================================
+SUBIR TUS CAMBIOS A GITHUB (Si el profesor te da acceso)
+================================================================================
+
+Si trabajas en tu rama personal:
+
+1. Haz tus cambios localmente
+
+2. Prepara los cambios:
+       git add .
+
+3. Crea un commit:
+       git commit -m "Descripción de qué cambiaste"
+
+4. Sube tu rama:
+       git push origin nombre-de-tu-rama
+
+5. En GitHub, crea un Pull Request (PR)
+
+6. El profesor revisa y aprueba
+
+
+REGLAS IMPORTANTES:
+- Nunca hacer git add .env
+- Siempre pullear antes de trabajar: git pull origin main
+- Usar nombres claros para commits
+
+
+================================================================================
+SOLUCIÓN DE PROBLEMAS
+================================================================================
+
+PROBLEMA: "node: command not found"
+CAUSA: Node.js no está instalado
+SOLUCIÓN: Descarga e instala de https://nodejs.org/
+
+PROBLEMA: npm install falla
+CAUSA: Problemas de conexión o node_modules corrompido
+SOLUCIÓN: 
+    rm -r node_modules
+    npm install
+
+PROBLEMA: Port 3000 already in use
+CAUSA: Otro proceso usa el puerto
+SOLUCIÓN:
+    taskkill /IM node.exe /F
+
+PROBLEMA: "DATABASE_URL is missing"
+CAUSA: El archivo .env no existe o está vacío
+SOLUCIÓN: Copia .env.example a .env y agrega credenciales
+
+PROBLEMA: Error de conexión a Supabase
+CAUSA: Credenciales incorrectas
+SOLUCIÓN: Verifica USER, PASSWORD y HOST en .env
+
+PROBLEMA: "Connection refused"
+CAUSA: El servidor no está corriendo
+SOLUCIÓN: Ejecuta: npm run dev
+
+PROBLEMA: Cambios no aparecen en la web
+CAUSA: El servidor no recompiló
+SOLUCIÓN: Guarda el archivo (Ctrl+S), espera 2s, recarga (Ctrl+R)
+
+PROBLEMA: Git no reconoce cambios
+CAUSA: Archivos en .gitignore
+SOLUCIÓN: Es normal, git ignora intencionalmente esos archivos
+
+
+================================================================================
+COMANDOS ÚTILES
+================================================================================
+
+Ver estado del proyecto:
+    npm run dev              # Iniciar servidor
+    npm run build            # Compilar para producción
+    npm run lint             # Revisar código
+    
+Base de datos:
+    npm run prisma:migrate  # Crear tablas
+    npm run prisma:seed     # Cargar datos de ejemplo
+    
+Git:
+    git status              # Ver cambios
+    git log                 # Ver historial
+    git pull origin main    # Actualizar desde GitHub
+
+
+================================================================================
+ESTRUCTURA DEL PROYECTO
+================================================================================
+
+app/
+  ├── page.tsx                 # Login/Registro
+  ├── trading/page.tsx         # Dashboard
+  ├── globals.css              # Estilos
+  └── api/                     # Backend (endpoints)
+
+prisma/
+  ├── schema.prisma            # Estructura de BD
+  └── migrations/              # Historial de cambios
+
+package.json                    # Dependencias
+README.md                       # Documentación
+.env                           # Credenciales (no versionar)
+
+
+================================================================================
+CÓMO PEDIR AYUDA
+================================================================================
+
+Si tienes problemas:
+
+1. Lee el README.md primero
+2. Lee esta guía (STUDENT_INSTRUCTIONS.txt)
+3. Busca el error en Google
+4. Contacta al profesor con:
+   - Descripción clara del problema
+   - Error exacto que ves
+   - Qué estabas intentando hacer
+
+
+================================================================================
+CONCEPTOS CLAVE
+================================================================================
+
+🎯 Frontend: Código React (componentes visuales)
+   Ubicación: app/page.tsx, app/trading/page.tsx
+   Lo que ves en la pantalla
+
+🔧 Backend: API endpoints (lógica del servidor)
+   Ubicación: app/api/
+   Procesa datos, conecta con BD
+
+💾 Base de Datos: PostgreSQL en Supabase
+   Almacena usuarios, cuentas, transacciones
+   Acceso con Prisma ORM
+
+🎨 Estilos: Tailwind CSS
+   Archivo: app/globals.css
+   Controla la apariencia visual
+
+
+================================================================================
+SIGUIENTE PASO: MODIFICAR EL PROYECTO
+================================================================================
+
+Una vez que todo funciona, puedes:
+
+1. Cambiar colores en app/globals.css
+2. Agregar nuevas funciones en app/trading/page.tsx
+3. Crear nuevos endpoints en app/api/
+4. Personalizar el nombre de la moneda
+5. Cambiar el balance inicial en prisma/schema.prisma
+
+Para cambios complejos, consulta:
+- README.md (documentación completa)
+- Comentarios en el código
+- GITHUB_SETUP.txt (para subir cambios)
+
+
+================================================================================
+CONTACTO Y REFERENCIAS
+================================================================================
+
+Documentación oficial:
+- Next.js: https://nextjs.org/docs
+- Prisma: https://www.prisma.io/docs
+- Tailwind: https://tailwindcss.com/docs
+- Supabase: https://supabase.com/docs
+
+Problemas específicos:
+- Google con el error exacto
+- Stack Overflow: https://stackoverflow.com
+- Discord de Next.js, React, etc.
+
+
+================================================================================
+¡LISTO PARA EMPEZAR!
+================================================================================
+
+Sigue estos pasos en orden:
+1. Clonar proyecto
+2. npm install
+3. Crear .env
+4. npm run prisma:migrate
+5. npm run dev
+6. ¡Abre http://localhost:3000!
+
+Si todo funciona, ¡felicidades! Puedes empezar a modificar el código.
+
+Última actualización: 26 de noviembre de 2025

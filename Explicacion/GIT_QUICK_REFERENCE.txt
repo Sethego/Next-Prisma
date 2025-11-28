@@ -1,0 +1,279 @@
+================================================================================
+REFERENCIA RÁPIDA: COMANDOS GIT ESENCIALES
+================================================================================
+
+Para usar cuando ya tienes el proyecto configurado en GitHub
+
+
+SINCRONIZAR CON CAMBIOS REMOTOS:
+================================
+
+git pull origin main
+  ├─ Descarga cambios de GitHub
+  └─ Los fusiona con tu rama local
+
+
+GUARDAR TUS CAMBIOS:
+====================
+
+git add .
+  └─ Prepara TODOS los cambios para commit
+
+git add nombre-archivo.ts
+  └─ Prepara UN ARCHIVO ESPECÍFICO
+
+git status
+  └─ Ver qué cambios hay sin guardar
+
+
+CREAR COMMIT (Foto del estado actual):
+========================================
+
+git commit -m "Descripción clara del cambio"
+  └─ Ejemplo: "Fix login bug" o "Add trading feature"
+
+REGLA: Usa mensajes claros, en inglés preferiblemente:
+  ✓ "Add user authentication"
+  ✗ "asdasd" o "fix"
+
+
+SUBIR A GITHUB:
+===============
+
+git push origin main
+  └─ Sube tus commits a GitHub
+
+git push
+  └─ Versión corta (si ya configuraste -u)
+
+
+VER HISTORIAL:
+==============
+
+git log
+  └─ Ver todos los commits (presiona 'q' para salir)
+
+git log --oneline
+  └─ Ver commits en formato resumido
+
+
+DESHACER CAMBIOS:
+=================
+
+git checkout -- nombre-archivo.ts
+  └─ Deshacer cambios en UN ARCHIVO
+
+git reset --soft HEAD~1
+  └─ Deshacer el último commit pero MANTENER cambios
+
+git reset --hard HEAD~1
+  └─ Deshacer el último commit y PERDER cambios ⚠️
+
+
+CREAR RAMA NUEVA:
+=================
+
+git checkout -b nombre-rama
+  └─ Crear y cambiar a nueva rama
+
+git checkout nombre-rama
+  └─ Cambiar a rama existente
+
+git branch -d nombre-rama
+  └─ Eliminar rama
+
+
+WORKFLOW TÍPICO (Paso a paso):
+===============================
+
+1. git pull origin main                  # Sincronizar
+2. # ... hacer cambios en el código ...
+3. git add .                             # Preparar cambios
+4. git commit -m "Descripción"           # Crear snapshot
+5. git push origin main                  # Subir a GitHub
+
+
+WORKFLOW CON RAMA (Para cambios grandes):
+===========================================
+
+1. git checkout -b nombre-feature        # Nueva rama
+2. # ... trabajar en los cambios ...
+3. git add .                             # Preparar cambios
+4. git commit -m "Descripción"           # Guardar
+5. git push -u origin nombre-feature     # Subir rama
+6. # En GitHub: crear Pull Request (PR)
+7. # Revisar, aprobar, fusionar en main
+
+
+INFORMACIÓN ÚTIL:
+=================
+
+Ver configuración:
+    git config --list
+
+Ver URL remota:
+    git remote -v
+
+Ver diferencias:
+    git diff                             # Cambios sin guardar
+    git diff --cached                    # Cambios preparados
+
+Ver ramas:
+    git branch -a                        # Todas las ramas
+
+
+EMERGENCIA: Accidentalmente con .env
+====================================
+
+git rm --cached .env                     # Quitar del seguimiento
+git commit -m "Remove .env (was added by mistake)"
+git push origin main
+
+
+RESTAURAR UN ARCHIVO DE UN COMMIT ANTERIOR:
+============================================
+
+git checkout <hash-del-commit> -- nombre-archivo.ts
+  └─ Restaura versión anterior de un archivo
+  └─ <hash-del-commit> lo ves con "git log --oneline"
+
+
+================================================================================
+FLUJO DE TRABAJO PARA MÚLTIPLES DESARROLLADORES
+================================================================================
+
+DESARROLLADOR A (Tú):
+1. Haces cambios
+2. git add . && git commit -m "Feature X"
+3. git push origin main
+
+DESARROLLADOR B (Otra persona):
+1. Hace sus cambios
+2. git add . && git commit -m "Feature Y"
+3. git push origin main
+
+TÚ DE NUEVO:
+1. git pull origin main                  # Descargas cambios de B
+2. Haces más cambios
+3. git add . && git commit -m "Fix bug"
+4. git push origin main
+
+
+CUANDO HAY CONFLICTOS (Alguien cambió lo mismo que tú):
+========================================================
+
+1. git pull origin main                  # Git avisa del conflicto
+
+2. Git marca los conflictos así:
+   <<<<<<< HEAD
+   Tu código aquí
+   =======
+   Código de otro aquí
+   >>>>>>> origin/main
+
+3. Edita el archivo y elige cuál código mantener
+
+4. git add archivo-con-conflicto.ts
+   git commit -m "Resolve merge conflict"
+   git push origin main
+
+
+================================================================================
+TIPS Y BUENAS PRÁCTICAS
+================================================================================
+
+✅ HACER:
+- Hacer commits frecuentes (cada feature pequeña)
+- Mensajes claros en inglés: "Add login form"
+- Pullear antes de trabajar (git pull origin main)
+- Revisar cambios antes de commit (git status)
+
+❌ NO HACER:
+- Un único commit gigante al final
+- Mensajes sin sentido: "lol" o "asdasd"
+- Subir directamente a main sin revisar
+- Hacer git push sin haber pulleado primero
+
+⚠️ NUNCA:
+- git add .env (contiene credenciales)
+- git push --force (a menos que sepas qué haces)
+- Borrar la rama main
+
+
+================================================================================
+MENSAJES DE COMMIT RECOMENDADOS
+================================================================================
+
+Usa estos prefijos para claridad:
+
+feat:   Nueva funcionalidad
+  feat: Add login system
+
+fix:    Corregir bug
+  fix: Fix database connection issue
+
+docs:   Cambios en documentación
+  docs: Update README with setup instructions
+
+style:  Cambios de código (formateo, etc)
+  style: Format code with prettier
+
+refactor: Reorganizar código sin cambiar funcionamiento
+  refactor: Refactor auth logic
+
+perf:   Mejora de performance
+  perf: Optimize database queries
+
+test:   Agregar o cambiar tests
+  test: Add login tests
+
+chore:  Cambios en herramientas/dependencias
+  chore: Update Next.js to v17
+
+
+================================================================================
+ATAJOS EN GITBASH/POWERSHELL
+================================================================================
+
+Los comandos más usados puedes crearlos como alias:
+
+# En PowerShell, crear alias temporal:
+Set-Alias -Name gst -Value 'git status'
+Set-Alias -Name gp -Value 'git push origin main'
+
+# Uso:
+gst                    # En lugar de git status
+gp                     # En lugar de git push origin main
+
+
+================================================================================
+PROBLEMAS COMUNES Y SOLUCIONES
+================================================================================
+
+PROBLEMA: "fatal: not a git repository"
+CAUSA: No estás en la carpeta del proyecto
+SOLUCIÓN: cd a la carpeta correcta
+
+
+PROBLEMA: "error: failed to push some refs"
+CAUSA: GitHub tiene cambios que no tienes localmente
+SOLUCIÓN: git pull origin main primero
+
+
+PROBLEMA: Quiero deshacer el último commit
+SOLUCIÓN: git reset --soft HEAD~1
+
+
+PROBLEMA: Subí .env por accidente
+SOLUCIÓN: git rm --cached .env
+         git commit -m "Remove .env"
+         git push origin main
+
+
+PROBLEMA: Barra de progreso rara al hacer push
+SOLUCIÓN: Es normal, solo espera. Si tarda mucho, Ctrl+C y reintentar
+
+
+================================================================================
+Última actualización: 26 de noviembre de 2025
+================================================================================

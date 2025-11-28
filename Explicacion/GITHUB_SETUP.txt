@@ -1,0 +1,591 @@
+================================================================================
+GUÍA: CÓMO SUBIR COIN-X EXCHANGE A GITHUB
+================================================================================
+
+Este archivo contiene instrucciones paso a paso para subir tu proyecto Next.js
+a GitHub de forma correcta y segura.
+
+================================================================================
+📋 TABLA DE CONTENIDOS
+================================================================================
+
+1. Preparación Inicial
+2. Crear Repositorio en GitHub
+3. Configurar Git Localmente
+4. Archivos a Incluir/Excluir
+5. Subir el Proyecto
+6. Compartir con otros Desarrolladores
+7. Solución de Problemas
+
+================================================================================
+1. PREPARACIÓN INICIAL
+================================================================================
+
+PASO 1: Verifica que tienes Git instalado
+
+Abre PowerShell y ejecuta:
+    git --version
+
+Debes ver algo como: "git version 2.42.0.windows.1"
+
+Si NO aparece nada, descarga Git desde: https://git-scm.com/download/win
+
+
+PASO 2: Configura tu identidad de Git
+
+Ejecuta estos comandos UNA SOLA VEZ:
+
+    git config --global user.name "Tu Nombre Completo"
+    git config --global user.email "tu.email@example.com"
+
+Reemplaza:
+- "Tu Nombre Completo" con tu nombre real (ej: Juan Pérez)
+- "tu.email@example.com" con tu email de GitHub
+
+
+PASO 3: Verifica la configuración
+
+Ejecuta:
+    git config --global user.name
+    git config --global user.email
+
+Debería mostrar el nombre y email que configuraste.
+
+
+================================================================================
+2. CREAR REPOSITORIO EN GITHUB
+================================================================================
+
+PASO 1: Crea una cuenta de GitHub
+
+Si no tienes cuenta, ve a: https://github.com/signup
+Sigue los pasos para crear tu cuenta gratuita.
+
+
+PASO 2: Crea un nuevo repositorio
+
+1. Log in en GitHub (https://github.com/login)
+2. Haz clic en el botón "+" en la esquina superior derecha
+3. Selecciona "New repository"
+4. Completa los campos:
+
+   Repository name:        nextjs-prisma
+   Description:           Plataforma de trading ficticia con Next.js y Prisma
+   Visibility:            Public (si quieres compartirlo) o Private (solo tú)
+   Initialize with:       NO marques ninguna opción (dejaremos el repo vacío)
+
+5. Haz clic en "Create repository"
+
+
+PASO 3: Copia la URL del repositorio
+
+Verás una URL como:
+    https://github.com/TU_USUARIO/nextjs-prisma.git
+
+Cópiala (la necesitarás en el siguiente paso).
+
+
+================================================================================
+3. CONFIGURAR GIT LOCALMENTE
+================================================================================
+
+PASO 1: Abre PowerShell en la carpeta del proyecto
+
+Navega a tu proyecto:
+    cd "c:\Users\LuchoPan\Documents\.CLASES\Trabajos DevWeb\nextjs-prisma"
+
+
+PASO 2: Inicializa el repositorio Git
+
+Ejecuta:
+    git init
+
+Esto crea una carpeta oculta ".git" que gestiona el control de versiones.
+
+
+PASO 3: Agrega la URL remota (origin)
+
+Reemplaza TU_USUARIO con tu nombre de usuario de GitHub:
+
+    git remote add origin https://github.com/TU_USUARIO/nextjs-prisma.git
+
+Verifica que se agregó correctamente:
+    git remote -v
+
+Deberías ver dos líneas con tu URL (una para fetch, otra para push).
+
+
+PASO 4: Verifica el estado inicial
+
+Ejecuta:
+    git status
+
+Deberías ver algo como:
+    On branch master (o main)
+    nothing to commit, working tree clean
+
+
+================================================================================
+4. ARCHIVOS A INCLUIR/EXCLUIR
+================================================================================
+
+⚠️ IMPORTANTE: No todos los archivos deben subirse a GitHub
+
+ARCHIVOS A EXCLUIR (NUNCA subir a GitHub):
+========================================
+
+❌ .env
+   ├─ Contiene credenciales de base de datos
+   ├─ Contiene contraseñas sensibles
+   └─ NUNCA subir a repositorio público
+
+❌ node_modules/
+   ├─ Carpeta muy grande (100+ MB)
+   ├─ Se regenera con "npm install"
+   └─ Solo ocupa espacio en GitHub sin necesidad
+
+❌ .next/
+   ├─ Archivos compilados
+   ├─ Se regeneran con "npm run build"
+   └─ No necesarios en el repositorio
+
+❌ .turbo/
+   ├─ Caché de Turbopack
+   ├─ Se regenera automáticamente
+   └─ No necesarios en el repositorio
+
+
+ARCHIVOS A INCLUIR (SÍ subir a GitHub):
+========================================
+
+✅ app/
+   └─ Todo el código fuente React/Next.js
+
+✅ lib/
+   └─ Utilidades y funciones auxiliares
+
+✅ prisma/
+   ├─ schema.prisma (estructura de BD)
+   ├─ seed.ts (datos iniciales)
+   └─ migrations/ (historial de cambios BD)
+
+✅ public/
+   └─ Imágenes y archivos estáticos
+
+✅ package.json
+   ├─ Lista de dependencias
+   └─ Scripts del proyecto
+
+✅ package-lock.json
+   ├─ Versiones exactas de dependencias
+   └─ Importante para reproducibilidad
+
+✅ tsconfig.json
+   └─ Configuración de TypeScript
+
+✅ tailwind.config.ts
+   └─ Configuración de Tailwind CSS
+
+✅ postcss.config.js
+   └─ Configuración de PostCSS
+
+✅ next.config.ts
+   └─ Configuración de Next.js
+
+✅ .gitignore
+   └─ Archivo que lista qué NO subir (lo crearemos)
+
+✅ README.md
+   └─ Documentación del proyecto
+
+✅ .env.example (OPCIONAL)
+   ├─ Plantilla sin valores reales
+   ├─ Ayuda a otros desarrolladores
+   └─ Muestra qué variables necesitan
+
+
+PASO: Crear archivo .gitignore
+
+Ejecuta (en PowerShell, en la carpeta del proyecto):
+
+    @"
+# Dependencias
+node_modules/
+/.pnp
+.pnp.js
+
+# Compilación
+.next/
+out/
+build/
+dist/
+
+# Caché
+.turbo/
+.turbopack/
+
+# Variables de entorno (NO subir credenciales)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+"@ | Out-File -Encoding UTF8 .gitignore
+
+Esto crea un archivo ".gitignore" que le dice a Git qué archivos ignorar.
+
+
+PASO OPCIONAL: Crear .env.example
+
+Para ayudar a otros desarrolladores, crea un archivo de ejemplo sin datos reales:
+
+    @"
+# Supabase PostgreSQL Connection (reemplazar con valores reales)
+DATABASE_URL="postgresql://[USER]:[PASSWORD]@[HOST]:6543/postgres"
+DIRECT_URL="postgresql://[USER]:[PASSWORD]@[HOST]:5432/postgres"
+"@ | Out-File -Encoding UTF8 .env.example
+
+Los desarrolladores copiarán esto a .env y agregarán sus valores reales.
+
+
+================================================================================
+5. SUBIR EL PROYECTO
+================================================================================
+
+PASO 1: Agregar todos los archivos al staging
+
+Ejecuta:
+    git add .
+
+Esto prepara todos los archivos permitidos (respetando .gitignore) para commit.
+
+
+PASO 2: Crear tu primer commit
+
+Ejecuta:
+    git commit -m "Initial commit: Coin-X Exchange trading platform"
+
+Deberías ver algo como:
+    [main (root-commit) abc1234] Initial commit...
+     X files changed, Y insertions(+)
+     create mode 100644 app/...
+     ...
+
+
+PASO 3: Cambiar la rama a 'main' (si es necesario)
+
+Si tu rama se llama 'master', cámbiala a 'main' (estándar actual):
+
+    git branch -M main
+
+
+PASO 4: Subir a GitHub
+
+Ejecuta:
+    git push -u origin main
+
+Esto:
+- Sube todos tus archivos a GitHub
+- Conecta tu rama local 'main' con la remota
+- `-u` significa "upstream" (configurar tracking)
+
+Deberías ver algo como:
+    Enumerating objects: X, done.
+    Counting objects: 100% (X/X), done.
+    Writing objects: 100% (X/X), done.
+    Inserting objects...
+    remote: Create a pull request...
+    To github.com:TU_USUARIO/nextjs-prisma.git
+     * [new branch]      main -> main
+    Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+
+PASO 5: Verifica en GitHub
+
+1. Ve a https://github.com/TU_USUARIO/nextjs-prisma
+2. Deberías ver todos tus archivos subidos
+3. Verifica que:
+   - No hay carpeta "node_modules" (demasiado grande)
+   - Hay archivo .env.example pero NO .env
+   - README.md está visible
+
+
+================================================================================
+6. COMPARTIR CON OTROS DESARROLLADORES
+================================================================================
+
+Una vez que tu proyecto está en GitHub, otros pueden:
+
+
+OPCIÓN A: Descargar tu código (sin poder cambiar)
+
+1. Van a tu repositorio en GitHub
+2. Hacen clic en "Code" (botón verde)
+3. Copian la URL HTTPS
+4. En su computadora ejecutan:
+       git clone https://github.com/TU_USUARIO/nextjs-prisma.git
+5. Luego:
+       cd nextjs-prisma
+       npm install
+       # Crear archivo .env con sus credenciales
+       npm run dev
+
+
+OPCIÓN B: Colaborar (poder cambiar el código)
+
+1. El otro desarrollador hace un "Fork" de tu repo
+2. O le das acceso como "Collaborator" en Settings → Collaborators
+3. Usa Git para sincronizar cambios:
+   
+   Bajar cambios:
+       git pull origin main
+   
+   Subir cambios:
+       git add .
+       git commit -m "Descripción del cambio"
+       git push origin main
+
+
+COSAS A EXPLICARLES A OTROS DESARROLLADORES:
+=============================================
+
+1. Necesitan tener Node.js v18+ instalado
+   
+2. Pasos para empezar:
+       git clone https://github.com/TU_USUARIO/nextjs-prisma.git
+       cd nextjs-prisma
+       npm install
+       
+3. Crear archivo .env (copiando de .env.example):
+       Copiar .env.example a .env
+       Reemplazar con sus credenciales de Supabase
+       
+4. Configurar base de datos:
+       npm run prisma:migrate
+       
+5. Iniciar desarrollo:
+       npm run dev
+       
+6. Consejo importante:
+       NUNCA hacer "git add .env" o "git push" con credenciales
+
+
+================================================================================
+7. SOLUCIÓN DE PROBLEMAS
+================================================================================
+
+PROBLEMA: "fatal: not a git repository"
+SOLUCIÓN: Asegúrate de estar en la carpeta correcta:
+         cd "c:\Users\LuchoPan\Documents\.CLASES\Trabajos DevWeb\nextjs-prisma"
+         git status
+
+PROBLEMA: "fatal: unable to access 'https://github.com/...' No such file..."
+SOLUCIÓN: Verifica que la URL remota es correcta:
+         git remote -v
+         Si está mal, cambia:
+         git remote remove origin
+         git remote add origin https://github.com/TU_USUARIO/nextjs-prisma.git
+
+PROBLEMA: "Permission denied (publickey)"
+SOLUCIÓN: Esto ocurre si usas SSH. Usa HTTPS en lugar de SSH:
+         git remote set-url origin https://github.com/TU_USUARIO/nextjs-prisma.git
+
+PROBLEMA: Accidentalmente hiciste "git add .env"
+SOLUCIÓN: Revierte con:
+         git rm --cached .env
+         git commit -m "Remove .env file (was added accidentally)"
+         git push origin main
+
+PROBLEMA: Quieres cambiar la descripción del proyecto
+SOLUCIÓN: Ve a GitHub → Settings → Description/README
+         O edita directamente el README.md en GitHub
+
+PROBLEMA: "The file will be stored as [file] in the repository"
+         (Advertencia sobre línea nueva al final)
+SOLUCIÓN: Ignorar, no es un error real. Git lo maneja automáticamente.
+
+PROBLEMA: Quieres eliminar el repositorio de GitHub
+SOLUCIÓN: Ve a Settings → Danger Zone → Delete this repository
+         Escribe el nombre exacto del repo para confirmar
+         ⚠️ CUIDADO: Esto no se puede deshacer
+
+
+================================================================================
+8. COMANDOS GIT ÚTILES PARA EL FUTURO
+================================================================================
+
+Ver estado actual:
+    git status
+
+Ver historial de cambios:
+    git log
+
+Ver cambios no guardados:
+    git diff
+
+Deshacer cambios en un archivo:
+    git checkout -- nombre_archivo.ts
+
+Deshacer el último commit (sin perder cambios):
+    git reset --soft HEAD~1
+
+Ver qué habrá si hago push:
+    git log origin/main..main
+
+Sincronizar con cambios remotos:
+    git pull origin main
+
+Crear una nueva rama para trabajar:
+    git checkout -b nombre-nueva-rama
+    # Hacer cambios...
+    git add .
+    git commit -m "Cambios en la rama"
+    git push -u origin nombre-nueva-rama
+
+Cambiar a rama existente:
+    git checkout nombre-rama
+
+Fusionar rama a main:
+    git checkout main
+    git merge nombre-rama
+    git push origin main
+
+
+================================================================================
+9. CHECKLIST FINAL ANTES DE SUBIR
+================================================================================
+
+Antes de hacer "git push", verifica:
+
+☐ El archivo .gitignore existe y contiene node_modules/, .env, .next/, .turbo/
+☐ Ejecutaste "npm install" sin errores
+☐ El proyecto compila: npm run dev funciona
+☐ No hay archivos .env subidos (git status no debe mostrarlos)
+☐ El README.md está completo y actualizado
+☐ Creaste un repositorio en GitHub
+☐ Configuraste git remote con "git remote add origin..."
+☐ Ejecutaste "git add ." correctamente
+☐ El commit tiene un mensaje descriptivo
+☐ Tu rama se llama "main" (no "master")
+☐ Tienes conexión a internet
+
+
+================================================================================
+10. DESPUÉS DE SUBIR: MANTENER EL PROYECTO
+================================================================================
+
+COLABORADORES QUE HACEN CAMBIOS:
+
+1. Alguien hace cambios en GitHub directamente (web editor)
+2. Tú los descargas con:
+       git pull origin main
+
+3. Si hay conflictos, Git te avisará. Resuelve manualmente.
+
+
+ACTUALIZAR DOCUMENTACIÓN:
+
+Si cambias algo importante, actualiza el README.md:
+
+1. Edita el archivo localmente
+2. Commit y push:
+       git add README.md
+       git commit -m "Update README with new features"
+       git push origin main
+
+
+CREAR RELEASES:
+
+Para marcar versiones importantes (v1.0, v1.1, etc.):
+
+En GitHub:
+1. Ve a "Releases"
+2. Haz clic en "Create a new release"
+3. Completa los datos y publica
+
+
+================================================================================
+RESUMEN RÁPIDO (Versión corta para recordar)
+================================================================================
+
+1. git init
+2. git remote add origin https://github.com/TU_USUARIO/nextjs-prisma.git
+3. Crear .gitignore (con node_modules, .env, .next, .turbo)
+4. git add .
+5. git commit -m "Initial commit"
+6. git branch -M main (si es necesario)
+7. git push -u origin main
+
+¡Listo! Tu proyecto está en GitHub.
+
+
+================================================================================
+RECURSOS Y ENLACES ÚTILES
+================================================================================
+
+GitHub Docs (Oficial):
+https://docs.github.com/en/get-started
+
+Git Tutorial (Completo):
+https://git-scm.com/book/en/v2
+
+GitHub Desktop (GUI alternativa a comandos):
+https://desktop.github.com/
+
+Gitignore Templates:
+https://github.com/github/gitignore
+
+Pro Tip: Usa GitHub Desktop si prefieres interfaz gráfica en lugar de comandos.
+
+
+================================================================================
+PREGUNTAS FRECUENTES
+================================================================================
+
+P: ¿Puedo cambiar el nombre del proyecto después?
+R: Sí. En GitHub Settings → Repository name
+   Y localmente: git remote set-url origin https://github.com/TU_USUARIO/nombre-nuevo.git
+
+P: ¿Qué pasa si subo algo que no debería?
+R: Usa "git rm --cached archivo" y commit de nuevo
+   O borra el repo y crea uno nuevo si contiene credenciales
+
+P: ¿Cuál es la diferencia entre Public y Private?
+R: Public: Todos pueden ver tu código (para portafolio)
+   Private: Solo tú y colaboradores invitados pueden verlo
+
+P: ¿Puedo tener múltiples proyectos en GitHub?
+R: Sí, puedes crear tantos repositorios como quieras
+
+P: ¿Cuánto cuesta GitHub?
+R: GitHub es GRATUITO para repositorios públicos y privados ilimitados
+
+P: ¿Mi .env.example será visible públicamente?
+R: Sí, pero contiene solo nombres de variables, NO los valores sensibles
+
+
+================================================================================
+FIN DE LA GUÍA
+================================================================================
+
+Si tienes preguntas, consulta:
+1. README.md del proyecto
+2. Documentación de GitHub: https://docs.github.com
+3. Stack Overflow: https://stackoverflow.com (busca tu error)
+
+Última actualización: 26 de noviembre de 2025
+Autor: GitHub Copilot

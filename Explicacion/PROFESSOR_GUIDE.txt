@@ -1,0 +1,508 @@
+================================================================================
+RESUMEN PARA EL PROFESOR: COIN-X EXCHANGE
+================================================================================
+
+Este documento es un resumen ejecutivo para ayudarte a presentar y gestionar
+el proyecto Coin-X Exchange con tus estudiantes.
+
+
+================================================================================
+¿QUÉ ES COIN-X EXCHANGE?
+================================================================================
+
+Una plataforma de trading de criptomonedas ficticia donde:
+
+✓ Cada estudiante se registra con su email
+✓ Recibe $10,000 USD virtuales
+✓ Puede comprar/vender Coin-X (criptomoneda ficticia)
+✓ El precio cambia en tiempo real (simulación)
+✓ Todos los trades se guardan en base de datos
+✓ Cada estudiante ve solo sus datos
+
+PROPÓSITO EDUCATIVO:
+- Enseñar Next.js (frontend moderno)
+- Enseñar React (componentes interactivos)
+- Enseñar Prisma (acceso a base de datos)
+- Enseñar APIs REST (backend)
+- Enseñar Git/GitHub (versionado de código)
+- Enseñar Tailwind CSS (estilos modernos)
+- Enseñar PostgreSQL (bases de datos)
+
+
+================================================================================
+TECNOLOGÍAS PRINCIPALES
+================================================================================
+
+Frontend:
+  • Next.js 16 - Framework React moderno
+  • React 19 - Librería de componentes UI
+  • Tailwind CSS v4 - Estilos con utilidades
+  • TypeScript - Type safety
+
+Backend:
+  • API REST en Next.js
+  • Prisma ORM - Acceso a base de datos
+  
+Base de Datos:
+  • PostgreSQL (en Supabase)
+  • 3 modelos: User, Account, Transaction
+
+
+================================================================================
+ARCHIVOS IMPORTANTES PARA COMPARTIR
+================================================================================
+
+CON LOS ESTUDIANTES:
+✓ README.md                    - Instrucciones completas
+✓ STUDENT_INSTRUCTIONS.txt    - Pasos para descargar y ejecutar
+✓ .env.example                - Plantilla de variables (sin secretos)
+✓ GIT_QUICK_REFERENCE.txt     - Comandos Git útiles
+
+CON OTROS DESARROLLADORES:
+✓ GITHUB_SETUP.txt            - Cómo subir a GitHub
+✓ Resto del código (.ts, .tsx, .css)
+
+NUNCA COMPARTIR:
+✗ .env                        - Contiene credenciales reales
+✗ node_modules/              - Carpeta de dependencias (se regenera)
+✗ .next/                      - Archivos compilados (se regeneran)
+
+
+================================================================================
+ANTES DE EMPEZAR: CHECKLIST PARA EL PROFESOR
+================================================================================
+
+□ Crear una cuenta de GitHub (si no tienes)
+□ Crear un repositorio llamado "nextjs-prisma" en GitHub
+□ Crear una cuenta de Supabase (si no tienes)
+□ Crear un proyecto en Supabase
+□ Obtener credenciales de PostgreSQL (Connection Pooler + Direct)
+□ Configurar archivo .env localmente
+□ Ejecutar "npm install"
+□ Ejecutar "npm run prisma:migrate"
+□ Ejecutar "npm run dev" y probar que funciona
+□ Subir a GitHub (git push)
+□ Actualizar .env.example si cambiaron variables
+□ Probar que estudiantes pueden clonar y ejecutar
+
+
+================================================================================
+CÓMO PRESENTAR A LOS ESTUDIANTES
+================================================================================
+
+CLASE 1: Introducción
+---------------------
+"Este es un proyecto real de trading. Cada uno de ustedes:
+ - Se registra con su email
+ - Recibe $10,000 USD ficticios
+ - Puede comprar/vender Coin-X
+ - Aprenderá cómo funcionan las aplicaciones web modernas"
+
+Mostrar el proyecto corriendo en vivo (http://localhost:3000)
+
+
+CLASE 2: Instalación Inicial
+-----------------------------
+"Vamos a descargar el proyecto y hacerlo correr localmente"
+
+Guiar paso a paso usando STUDENT_INSTRUCTIONS.txt:
+1. git clone
+2. npm install
+3. Crear .env
+4. npm run prisma:migrate
+5. npm run dev
+6. Registrarse y probar
+
+
+CLASE 3+: Exploración del Código
+---------------------------------
+"Ahora vamos a entender cómo funciona por dentro"
+
+Mostrar:
+- app/page.tsx - Formulario de login
+- app/trading/page.tsx - Dashboard principal
+- app/api/auth/ - Autenticación backend
+- app/api/trade/ - Lógica de trading
+- prisma/schema.prisma - Estructura de base de datos
+- app/globals.css - Estilos con Tailwind
+
+
+CLASE 4+: Modificaciones
+-------------------------
+"Ustedes van a hacer cambios al código"
+
+Propuestas de cambios:
+- Cambiar colores del tema
+- Agregar nueva criptomoneda
+- Cambiar el balance inicial
+- Agregar validaciones
+- Crear nuevas funciones
+
+
+CLASE FINAL: Git y GitHub
+--------------------------
+"Subirán sus cambios a GitHub"
+
+Usar GITHUB_SETUP.txt para explicar:
+- git add, commit, push
+- Crear rama personal
+- Pull request
+- Revisión de código
+
+
+================================================================================
+GESTIONAR MÚLTIPLES ESTUDIANTES
+================================================================================
+
+OPCIÓN 1: Todos trabajan en el mismo repositorio
+Ventajas:
+  ✓ Todos ven los cambios de todos
+  ✓ Aprenden a colaborar
+  ✗ Muchos conflictos de merge
+
+Cómo hacerlo:
+  1. Crear un repositorio compartido
+  2. Agregar estudiantes como "Collaborators"
+  3. Cada estudiante crea su rama: "git checkout -b nombre-estudiante"
+  4. Hacen cambios en su rama
+  5. Crean Pull Request (PR) para fusionar a main
+  6. Tu revisas y fusionas
+
+OPCIÓN 2: Cada estudiante hace un Fork
+Ventajas:
+  ✓ Cada uno tiene su versión
+  ✓ No hay conflictos
+  ✓ Es como en el mundo real
+  
+Cómo hacerlo:
+  1. Estudiante hace Fork del repo
+  2. Clona su fork: git clone su-url
+  3. Hace cambios localmente
+  4. Push a su fork: git push origin main
+  5. (Opcional) Crea Pull Request al repo original
+
+
+OPCIÓN 3: Todos trabajan localmente (para principiantes)
+Ventajas:
+  ✓ Sin complicaciones de Git
+  ✓ Se enfoca en aprender el código
+  ✗ Pierden aprendizaje de Git
+
+Cómo hacerlo:
+  1. Compartir carpeta del proyecto (USB, Drive, OneDrive)
+  2. Cada uno copia a su computadora
+  3. Hacen cambios localmente
+  4. Comparten cambios manualmente
+
+
+RECOMENDACIÓN:
+Para aprendizaje máximo: OPCIÓN 1 (rama personal + PR)
+
+
+================================================================================
+PROPUESTAS DE EJERCICIOS PARA ESTUDIANTES
+================================================================================
+
+NIVEL PRINCIPIANTE:
+==================
+
+1. Cambiar Colores
+   Edita app/globals.css
+   Cambia verde por azul, etc
+   
+2. Cambiar Balance Inicial
+   Edita prisma/schema.prisma
+   Cambia @default(10000.0) a otro valor
+   Ejecuta npm run prisma:migrate
+   
+3. Cambiar Nombre de Moneda
+   Busca "Coin-X" en todos los archivos
+   Reemplaza con "Bitcoin" o "Ethereum"
+   
+4. Agregar Campo a Usuario
+   Edita prisma/schema.prisma
+   Agrega un campo nuevo (ej: "country: String")
+   Ejecuta npm run prisma:migrate
+   Usa el campo en el formulario
+
+
+NIVEL INTERMEDIO:
+=================
+
+1. Agregar Nueva Criptomoneda
+   Edita el esquema de Prisma
+   Agrega "Coin-Y" además de "Coin-X"
+   Modifica la UI para mostrar ambas
+   
+2. Limitar Órdenes
+   Agregue validación: máximo 5 trades por día
+   Usa fecha de createdAt en prisma
+   
+3. Agregar Notificaciones
+   Cuando compra/vende, mostrar:
+   "¡Compraste 5 Coin-X por $500!"
+   
+4. Gráfico Histórico
+   Crea tabla de precios históricos
+   Muestra tendencia de últimas 24 horas
+
+
+NIVEL AVANZADO:
+===============
+
+1. Sistema de Amigos
+   Agregar modelo Friend en Prisma
+   Ver saldos de amigos
+   Hacer transferencias entre usuarios
+   
+2. Sistema de Órdenes
+   Crear órdenes LIMIT (compra a precio específico)
+   Crear órdenes STOP (venta automática si baja)
+   
+3. Leaderboard
+   Top 10 traders por ganancia
+   Ranking global de balances
+   
+4. Autenticación Real
+   Implementar contraseñas con hash
+   O agregar login con Google/GitHub
+   
+5. Notificaciones en Tiempo Real
+   WebSockets para actualizaciones live
+   Notificaciones cuando otra persona hace trade
+
+
+CALIFICACIÓN SUGERIDA:
+======================
+
+Completa:
+  ✓ Proyecto corre sin errores: 20 pts
+  ✓ Código está en GitHub: 20 pts
+  ✓ Documentación (commits claros): 20 pts
+  
+Cambios realizados:
+  ✓ 1 ejercicio nivel principiante: 15 pts
+  ✓ 1 ejercicio nivel intermedio: 15 pts
+  ✓ 1 ejercicio nivel avanzado: 10 pts
+
+Total: 100 pts
+
+
+================================================================================
+SOLUCIÓN DE PROBLEMAS COMUNES
+================================================================================
+
+PROBLEMA: Estudiante no puede conectar a Supabase
+SOLUCIÓN: 
+  - Verificar que .env tiene credenciales correctas
+  - Verificar que DATABASE_URL y DIRECT_URL son diferentes
+  - Probar: npx prisma db execute --stdin < query.sql
+  
+PROBLEMA: "Unique constraint failed" en login
+SOLUCIÓN:
+  - Un estudiante se registró dos veces
+  - Eliminar usuario duplicado en Supabase dashboard
+
+PROBLEMA: Estudiante hizo git push sin intención
+SOLUCIÓN:
+  - Si fue .env: URGENTE, cambiar credenciales Supabase
+  - Si fue otro archivo: git reset --hard HEAD~1 && git push -f
+
+PROBLEMA: Conflictos de merge cuando todos editan mismo archivo
+SOLUCIÓN:
+  - Usar ramas personales (git checkout -b nombre-estudiante)
+  - Cada uno edita archivo diferente
+  - O asignar secciones del código a cada estudiante
+
+PROBLEMA: node_modules se subió a GitHub (muy grande)
+SOLUCIÓN:
+  - Ya debería estar en .gitignore
+  - Si no: git rm -r --cached node_modules
+  - git commit -m "Remove node_modules"
+  - git push origin main
+
+
+================================================================================
+RECURSOS PARA EL PROFESOR
+================================================================================
+
+Documentación Oficial:
+  https://nextjs.org/docs
+  https://react.dev
+  https://www.prisma.io/docs
+  https://tailwindcss.com/docs
+  https://supabase.com/docs
+
+Tutoriales en YouTube:
+  "Next.js 13 Full Course" - Dave Gray
+  "React Course for Beginners" - Scrimba
+  "Prisma Tutorial" - Web Dev Simplified
+
+Comunidades:
+  Discord de Next.js
+  Discord de React
+  Stack Overflow
+
+Inspiración:
+  GitHub Trending (proyectos similares)
+  Product Hunt (ideas de features)
+
+
+================================================================================
+PLAN SUGERIDO DE CURSO (4-6 semanas)
+================================================================================
+
+SEMANA 1: Introducción a Next.js
+  Día 1: Conceptos de React
+  Día 2: Componentes y JSX
+  Día 3: Estado (useState)
+  Día 4: Efectos (useEffect)
+  Día 5: Proyecto: Coin-X, descargar y ejecutar
+
+SEMANA 2: Backend y Base de Datos
+  Día 1: API REST concepts
+  Día 2: Prisma ORM
+  Día 3: Modelos de datos
+  Día 4: Migraciones
+  Día 5: Ejercicio: Agregar campo nuevo a Usuario
+
+SEMANA 3: Autenticación
+  Día 1: Cookies y sesiones
+  Día 2: Proteger rutas
+  Día 3: Implementar logout
+  Día 4: Entender flujo de auth en Coin-X
+  Día 5: Ejercicio: Agregar nueva criptomoneda
+
+SEMANA 4: Estilos y UX
+  Día 1: Tailwind CSS basics
+  Día 2: Componentes reutilizables
+  Día 3: Responsive design
+  Día 4: Animaciones CSS
+  Día 5: Ejercicio: Cambiar colores del tema
+
+SEMANA 5: Git y Colaboración
+  Día 1: Git basics (add, commit, push)
+  Día 2: Ramas y merge
+  Día 3: Pull requests y revisión
+  Día 4: Conflictos de merge
+  Día 5: Ejercicio: Subir cambios a GitHub
+
+SEMANA 6: Proyecto Final
+  Estudiantes implementan ejercicio nivel intermedio/avanzado
+  Presentaciones de proyectos
+  Revisión de código con profesor
+
+
+================================================================================
+COMANDOS ÚTILES PARA EL PROFESOR
+================================================================================
+
+Ver quién hizo qué:
+  git log --author="nombre estudiante"
+
+Ver cambios específicos:
+  git show commit-hash
+
+Revertir cambios roto a versión anterior:
+  git revert commit-hash
+
+Ver diferencias entre versiones:
+  git diff main nombre-rama
+
+Fusionar rama de estudiante:
+  git merge nombre-rama
+
+Ver todos los commits de hoy:
+  git log --since="1 day ago"
+
+
+================================================================================
+DISTRIBUCIÓN DE ARCHIVOS
+================================================================================
+
+COMPARTIR CON ESTUDIANTES:
+- Copiar la carpeta "nextjs-prisma" (sin node_modules)
+- O dar link al repositorio GitHub
+- Incluir archivos:
+  • README.md - Documentación
+  • STUDENT_INSTRUCTIONS.txt - Pasos a seguir
+  • .env.example - Template de variables
+  • GIT_QUICK_REFERENCE.txt - Comandos Git
+
+NO COMPARTIR:
+- .env con credenciales reales
+- node_modules/ (es gigante)
+- .next/ (se regenera)
+
+
+================================================================================
+TIPS FINALES
+================================================================================
+
+1. Comienza simple
+   No trates de enseñar todo de una vez
+
+2. Usa ejemplos reales
+   "Esto es como en LinkedIn, Facebook, etc"
+
+3. Deja que rompan cosas
+   Los errores son las mejores lecciones
+
+4. Haz demostraciones en vivo
+   Escribe código frente a ellos
+
+5. Refiere a documentación oficial
+   Enseña a autosuficiencia
+
+6. Celebra el progreso
+   "¡Acabas de hacer tu primer request a la API!"
+
+7. Mantén el código limpio
+   Comenta y documenta bien
+
+8. Usa PR para revisar cambios
+   Feedback estructurado es valioso
+
+9. Mostrar soluciones múltiples
+   "Hay varias formas de hacerlo"
+
+10. Actualiza regularmente
+    Tech cambia rápido, mantén el proyecto actualizado
+
+
+================================================================================
+CONTACTO Y SOPORTE
+================================================================================
+
+Si tienes dudas sobre el proyecto:
+
+1. Revisa README.md (documentación completa)
+2. Revisa los archivos .txt incluidos
+3. Lee el código con comentarios
+4. Busca en Google/Stack Overflow
+5. Consulta documentación oficial de librerías
+6. Pide ayuda en comunidades de desarrollo
+
+
+================================================================================
+CONCLUSIÓN
+================================================================================
+
+Coin-X Exchange es una herramienta poderosa para enseñar desarrollo web moderno.
+
+Los estudiantes aprenderán:
+✓ Cómo construir aplicaciones reales
+✓ Cómo trabajar con bases de datos
+✓ Cómo organizar código grande
+✓ Cómo colaborar en GitHub
+✓ Mejores prácticas de desarrollo
+
+Todo en un proyecto práctico y atractivo.
+
+¡Buena suerte con tu clase!
+
+
+================================================================================
+Última actualización: 26 de noviembre de 2025
+Creado por: GitHub Copilot
+================================================================================
